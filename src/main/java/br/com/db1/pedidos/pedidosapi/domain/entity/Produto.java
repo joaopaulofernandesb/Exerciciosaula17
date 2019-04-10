@@ -1,4 +1,4 @@
-package br.com.db1.pedidos.pedidosapi.domain;
+package br.com.db1.pedidos.pedidosapi.domain.entity;
 
 
 import javax.persistence.Column;
@@ -32,6 +32,8 @@ public class Produto {
 	@Enumerated(EnumType.STRING)
 	@Column(name="status", length = 30, nullable = false)
 	private ProdutoStatus status;
+	
+	protected Produto() {}
 
 	public Produto(String codigo, String nome, Double valor) {
 		Verificador.naoNulo(codigo, "codigo do produto");
@@ -45,8 +47,8 @@ public class Produto {
 	}
 	
 	public void inativar() {
-		if (ProdutoStatus.ATIVO.equals(this.status)) {
-			throw new RuntimeException("Produto est� " + this.status);
+		if (!ProdutoStatus.ATIVO.equals(this.status)) {
+			throw new RuntimeException("Produto esto " + this.status);
 		}
 		this.status = ProdutoStatus.INATIVO;
 	}
@@ -54,6 +56,32 @@ public class Produto {
 	public boolean isAtivo() {
 		return  ProdutoStatus.ATIVO.equals(this.status);
 	}
+	
+public Long getId() {
+		
+		return id;
+	}
+
+
+	public void setId(Long id) {
+	this.id = id;
+}
+
+public void setCodigo(String codigo) {
+	this.codigo = codigo;
+}
+
+public void setNome(String nome) {
+	this.nome = nome;
+}
+
+public void setValor(Double valor) {
+	this.valor = valor;
+}
+
+public void setStatus(ProdutoStatus status) {
+	this.status = status;
+}
 
 	public String getCodigo() {
 		return codigo;
@@ -70,4 +98,7 @@ public class Produto {
 	public ProdutoStatus getStatus() {
 		return status;
 	}
+	
+	
+
 }

@@ -11,6 +11,7 @@ public class Verificador {
 	}
 
 	public static void cpf(String cpf) {
+		System.out.println(cpf);
 		if (Objects.isNull(cpf) || cpf.isEmpty() || cpf.length() != 11) {
 			throw new RuntimeException("CPF " + cpf + "  invá lido.");
 		}
